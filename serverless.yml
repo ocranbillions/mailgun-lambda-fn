@@ -1,0 +1,44 @@
+service: mailgunEventsService
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-1
+
+functions:
+  processMailgunEvent:
+    handler: dist/src/index.handler
+    dependsOn: 
+      - MailGunEvent
+      - mailgunEventsTable
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+resources:
+  Resources:
+    MailGunEvent:
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: MailGun
+        TopicName: mailgun-event
+    mailgunEventsTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties: 
+        TableName: mailgunEventsTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+package:
+  exclude:
+    - node_modules/**
+      
+
