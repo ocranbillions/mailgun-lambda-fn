@@ -12,13 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const verifyMailgunEvent_1 = __importDefault(require("./utils/verifyMailgunEvent"));
 const buildResponse_1 = __importDefault(require("./utils/buildResponse"));
 const storage_1 = __importDefault(require("./storage"));
 const Message_1 = __importDefault(require("./Message"));
-const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
+const processMailGunEvent = (event) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const eventBody = JSON.parse(event.body || '{}');
         const isValidMailgunEvent = (0, verifyMailgunEvent_1.default)(Object.assign({ signingKey: 'f07b238c23b6b6a47b58b665645677d1-07e2c238-a948e115' }, eventBody.signature));
@@ -38,4 +37,4 @@ const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
         return (0, buildResponse_1.default)(500, error.message);
     }
 });
-exports.handler = handler;
+exports.default = processMailGunEvent;

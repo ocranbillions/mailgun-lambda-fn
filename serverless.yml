@@ -7,7 +7,7 @@ provider:
 
 functions:
   processMailgunEvent:
-    handler: dist/src/index.handler
+    handler: dist/index.handler
     dependsOn: 
       - MailGunEvent
       - mailgunEventsTable

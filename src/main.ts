@@ -1,11 +1,11 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda';
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import crypto from 'crypto';
 import verifyMailgunEvent from './utils/verifyMailgunEvent';
 import buildResponse from './utils/buildResponse';
 import saveEvent from './storage';
 import Message from './Message';
 
-export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+const processMailGunEvent = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     const eventBody = JSON.parse(event.body || '{}');
     const isValidMailgunEvent = verifyMailgunEvent({
@@ -31,3 +31,5 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     return buildResponse(500, error.message);
   }
 };
+
+export default processMailGunEvent;
