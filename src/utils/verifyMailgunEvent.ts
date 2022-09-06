@@ -1,7 +1,7 @@
 import crypto from 'crypto';
-import { mailgunEventVerificationI } from '@src/@types';
+import { verifyEventI } from '@src/@types';
 
-const verifyMailgunEvent = (data: mailgunEventVerificationI): boolean => {
+const verifyMailgunEvent = (data: verifyEventI): boolean => {
   try {
     const { signingKey, timestamp, token, signature } = data;
     const encodedToken = crypto.createHmac('sha256', signingKey).update(timestamp.concat(token)).digest('hex');

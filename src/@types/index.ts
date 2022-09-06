@@ -4,7 +4,7 @@ export interface messageBodyI {
   type: string;
 }
 
-export interface mailgunEventVerificationI {
+export interface verifyEventI {
   signingKey: string;
   timestamp: string;
   token: string;
