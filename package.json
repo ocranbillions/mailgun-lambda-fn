@@ -2,7 +2,7 @@
   "name": "aws-serverless",
   "version": "1.0.0",
   "description": "AWS Serverless",
-  "main": "src/index.js",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
