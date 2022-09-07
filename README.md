@@ -9,6 +9,7 @@
 - Change the `AWS Region` in `dist/src/publisher.js` and `dist/src/storage.js` to your preferred region
 - Change the TopicArn in the `dist/src/publisher.js` file to your SNS TopicArn
 - Change the dynamodbTableName to your DynamoDB Table name
+- Update the value of `signingKey` in `dist/src/main.js` to your mailgun signing key - consider using env vars here (I didn't use it on purpose)
 - From within the dist folder, zip up the content `zip -r dist.zip .` and upload the zip file to your AWS lambda environment
 
 
